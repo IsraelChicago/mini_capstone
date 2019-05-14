@@ -1,21 +1,57 @@
 class Api::ProductsController < ApplicationController
 
-  def product_desc_action
+  def index
     @products = Product.all 
 
-    render 'products.json.jbuilder'
+    render 'index.json.jbuilder'
   end
 
-  def apple_action
-    @apple = Product.first 
+  def show
+    render 'show.json.jbuilder'
+  end
 
-    render 'apple.json.jbuilder'
-  end 
+  # def apple_action
+  #   @apple = Product.first 
 
-  def pear_action
-    @pear = Product.second
+  #   render 'apple.json.jbuilder'
+  # end 
 
-    render 'pear.json.jbuilder'
+  # def pear_action
+  #   @pear = Product.second
+
+  #   render 'pear.json.jbuilder'
+  # end
+
+  def query
+
+    render 'query.json.jbuilder'
+  end
+
+  # def create
+  #    @product = Product.new(
+  #   :name = params [:title] 
+  #   :price = params [:title] 
+  #   :image_url = params [:title] 
+  #   :describtion = params [:title] 
+  #   ) 
+
+  #   @product.save
+  # end
+
+  # def update
+  #   @product = Product.new(
+  #   :name = params [:title] || @products.name
+  #   :price = params [:title] || @products.price
+  #   :image_url = params [:title] || @products.image_url 
+  #   :describtion = params [:title] || @products.describtion
+  #   ) 
+
+  #   @product.save
+  # end
+
+  def delete 
+    @product = Product.find(params[:id])
+    @products.destory
   end
 
 end
