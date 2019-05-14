@@ -16,7 +16,7 @@ class Api::ProductsController < ApplicationController
       name: params[:name],
       price: params[:price],
       image_url: params[:image_url],
-      describtion: params[:describtion]
+      description: params[:description]
     )
     @product.save
     render 'show.json.jbuilder'
@@ -28,7 +28,7 @@ class Api::ProductsController < ApplicationController
     @product.name = params[:name] || @product.name
     @product.price = params[:price] || @product.price
     @product.image_url = params[:image_url] || @product.image_url
-    @product.describtion = params[:describtion] || @product.describtion
+    @product.description = params[:description] || @product.description
 
     @product.save
     render 'show.json.jbuilder'
