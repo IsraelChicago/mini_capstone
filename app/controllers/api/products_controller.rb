@@ -2,56 +2,43 @@ class Api::ProductsController < ApplicationController
 
   def index
     @products = Product.all 
-
     render 'index.json.jbuilder'
   end
 
   def show
+    product_id = params[:id]
+    @product = Product.find_by(id: product_id) #a hash of product data
     render 'show.json.jbuilder'
   end
 
-  # def apple_action
-  #   @apple = Product.first 
-
-  #   render 'apple.json.jbuilder'
-  # end 
-
-  # def pear_action
-  #   @pear = Product.second
-
-  #   render 'pear.json.jbuilder'
-  # end
-
-  def query
-
-    render 'query.json.jbuilder'
+  def create
+    @product = Product.new(
+      name: params[:name],
+      price: params[:price],
+      image_url: params[:image_url],
+      describtion: params[:describtion]
+    )
+    @product.save
+    render 'show.json.jbuilder'
   end
 
-  # def create
-  #    @product = Product.new(
-  #   :name = params [:title] 
-  #   :price = params [:title] 
-  #   :image_url = params [:title] 
-  #   :describtion = params [:title] 
-  #   ) 
-
-  #   @product.save
-  # end
-
-  # def update
-  #   @product = Product.new(
-  #   :name = params [:title] || @products.name
-  #   :price = params [:title] || @products.price
-  #   :image_url = params [:title] || @products.image_url 
-  #   :describtion = params [:title] || @products.describtion
-  #   ) 
-
-  #   @product.save
-  # end
-
-  def delete 
+  def update
     @product = Product.find(params[:id])
-    @products.destory
+
+    @product.name = params[:name] || @product.name
+    @product.price = params[:price] || @product.price
+    @product.image_url = params[:image_url] || @product.image_url
+    @product.describtion = params[:describtion] || @product.describtion
+
+    @product.save
+    render 'show.json.jbuilder'
   end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    render json: {message: "Product successfully destroyed!"}
+  end
+
 
 end

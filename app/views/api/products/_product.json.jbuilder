@@ -1,4 +1,7 @@
+json.id product.id
 json.name product.name
-json.price number_to_currancy(product.price)
-json.describtion product.describtion
+json.price product.price
 json.image_url product.image_url
+json.describtion product.describtion
+
+
