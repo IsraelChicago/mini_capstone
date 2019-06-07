@@ -1,6 +1,10 @@
 class Product < ApplicationRecord
 
-  has_many :orders
+  has_many :carted_products
+  has_many :orders, through: :carted_products
+  has_many :product_categories
+  has_many :categories, through: :product_categories
+  
   belongs_to :supplier 
   
   # def supplier
@@ -14,16 +18,16 @@ class Product < ApplicationRecord
   validates :price, numericality: { greater_than: 0 }
 
   validates :name, uniqueness: true
-  validates :image_url, uniqueness: true
+  
 
   validates :name, presence: true
   validates :price, presence: true
   validates :description, presence: true
-  validates :image_url, presence: true
+  
   validates :in_stock, presence: true
 
 
-  validates :name, :price, :image_url, :description, :in_stock, presence: true
+  validates :name, :price, :description, :in_stock, presence: true
 
   def is_discounted?
     price <= 10
